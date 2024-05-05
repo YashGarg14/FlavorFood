@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% block start %}
+<div class="container">
+    <h2>{{ recipe.title }}</h2>
+    <p style="font-size: small; margin: 0%;">Uploaded by: <strong>{{ recipe.user }}</strong></p>
+    <p style="font-size: small;">Last Modified: {{ recipe.date_modified }}</p>
+    <h6>Total time to Cook: {{ recipe.time_to_cook }} hr</h6><br>
+    <h4>Description:</h4>
+    <p style="max-width: 900px; text-align: justify;">{{ recipe.description }}</p>
+    <img src="/media/{{ recipe.recepie_image }}" alt="{{ recipe.title }}"
+        style="height: 400px; width: 400px; border-radius: 10px;"><br>
+        <br>
+    <h4>Ingredients:</h4>
+
+
+    <ul>
+        {{ recipe.ingredients|linebreaks}}
+    </ul>
+    <h4>Follow these instructions:</h4>
+    <p >{{ recipe.instructions|separate_instructions|safe }}</p>
+    
+    
+</div>
+<a href="javascript:history.go(-1);" class="btn btn-secondary">Previous page</a>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+
+{% block start %}
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container text-center">
+        <h1 class="display-4">Delicious Recipes</h1>
+        <p class="lead">Explore a variety of mouth-watering recipes!</p>
+        <a href="{% url 'recipes' %}" class="btn btn-custom btn-lg">Explore now</a>
+    </div>
+</div>
+<br>
+
+<div class="row">
+    <h5>Recently added Recipes...</h5>
+    <div class="row">
+        {% for rec in recipes %}
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <img src="/media/{{ rec.recepie_image }}" class="card-img-top" alt="{{ rec.title }}" style="height: 300px;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ rec.title }}</h5>
+                    <p class="card-text">{{ rec.description | truncatechars:100 }}</p>
+                    <a href="{% url 'recipe' rec.pk %}" class="btn btn-custom">View Recipe</a>
+                </div>
+            </div>
+        </div>
+        {% if forloop.counter|divisibleby:4 and not forloop.last %}
+            </div><div class="row">
+        {% endif %}
+        {% endfor %}
+    </div>
+    <br>
+    <h5>Most viewed Recipes...</h5>
+    <div class="row">
+        {% for rec in random_recipes %}
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <img src="/media/{{ rec.recepie_image }}" class="card-img-top" alt="{{ rec.title }}" style="height: 300px;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ rec.title }}</h5>
+                    <p class="card-text">{{ rec.description | truncatechars:100 }}</p>
+                    <a href="{% url 'recipe' rec.pk %}" class="btn btn-custom">View Recipe</a>
+                </div>
+            </div>
+        </div>
+        {% if forloop.counter|divisibleby:4 and not forloop.last %}
+            </div><div class="row">
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}

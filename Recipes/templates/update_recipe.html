@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+
+{% block start %}
+<div class="container">
+    <h2 style="color: #803D3B;">Update Recipe</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title" value="{{recipes.title}}"
+                placeholder="Enter recipe title" style="max-width: 300px;" required>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3"
+                placeholder="Enter recipe description" style="max-width: 700px; height: 100px;;"
+                required>{{recipes.description}}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="ingredients" class="form-label">Ingredients</label>
+            <textarea class="form-control" id="ingredients" name="ingredients" rows="5"
+                placeholder="Enter recipe ingredients, each on a new line" style="max-width: 300px;"
+                required>{{recipes.ingredients}}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="instructions" class="form-label">Instructions</label>
+            <textarea class="form-control" id="instructions" name="instructions" rows="5"
+                placeholder="Enter recipe instructions, each on a new line" style="max-width: 700px; height: 100px;;"
+                required>{{recipes.instructions}}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="time_to_cook" class="form-label">Time to Cook</label>
+            <div class="input-group">
+                <button type="button" class="btn btn-outline-secondary" onclick="decreaseValue()">-</button>
+                <input type="number" class="form-control" id="time_to_cook" name="time_to_cook"
+                    placeholder="Enter time to cook (hours)" min="0" oninput="validity.valid||(value='');"
+                    style="max-width: 230px;" required>
+                <button type="button" class="btn btn-outline-secondary" onclick="increaseValue()">+</button>
+            </div>
+            <div class="mb-3">
+                <label for="recepie_image" class="form-label">Recipe Image</label>
+                <input type="file" class="form-control" id="recepie_image" name="recepie_image" accept="image/*">
+            </div>
+            <button type="submit" class="btn btn-custom">Update Recipe</button>
+    </form>
+</div>
+<script>
+    function increaseValue() {
+        var value = parseInt(document.getElementById('time_to_cook').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value++;
+        document.getElementById('time_to_cook').value = value;
+    }
+
+    function decreaseValue() {
+        var value = parseInt(document.getElementById('time_to_cook').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value = value <= 0 ? 0 : value - 1;
+        document.getElementById('time_to_cook').value = value;
+    }
+</script>
+{% endblock %}

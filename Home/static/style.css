@@ -1,0 +1,38 @@
+.form-control:focus {
+    border-color: #803D3B;
+    box-shadow: 0 0 0 0.25rem #AF8260;
+}
+
+.btn-outline-custom {
+    color: #803D3B;
+    border-color: #803D3B;
+    font-weight: 700;
+    border-width: 2px;
+}
+.btn-outline-custom:hover {
+    color: #fff;
+    background-color: #803D3B;
+    border-color: #803D3B;
+}
+
+.btn-custom{
+    color: #fff;
+    background-color: #803D3B;
+    font-weight: 700;
+    border-width: 2px;
+    margin-right: 6px;
+}
+
+.btn-custom:hover {
+    border-color: #803D3B;
+    color: #803D3B;
+}
+.btn-custom-login{
+    color: #fff;
+    background-color: #803D3B;
+    font-weight: 700;
+    border-width: 2px;
+    margin-right: 6px;
+}
+
+

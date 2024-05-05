@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+
+{% block start %}
+<br>
+    <h2 style="font-weight: bold;">Your Recipes</h2>
+    
+    {% if user_recipes %}
+        <ul>
+            {% for recipe in user_recipes %}
+                <li style="font-size: 25px;">{{ recipe.title }}</li>
+                <p style="max-width: 700px;">{{recipe.description | truncatechars:200}}</p>
+                <a href="{% url 'recipe' recipe.pk %}" class="btn btn-custom">View Recipe</a>
+                <a href="/delete_recipe/{{recipe.id}}" class="btn btn-danger m-2">Delete</a>
+                <a href="/update_recipe/{{recipe.id}}" class="btn btn-success">Update</a>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Sorry, you haven't added any recipes yet.</p>
+        
+    {% endif %}
+    <h5>Add your recipe <a href="{% url 'add_recipe' %}">here</a></h5>
+    <h3>Explore other recipes <a href="{% url 'recipes' %}">here</a></h3>
+{% endblock %}
+    

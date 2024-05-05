@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<form class="d-flex">
+    <input class="form-control me-2" type="search" placeholder="Search Recipe"
+        aria-label="Search" name="search">
+    <button class="btn btn-outline-custom " type="submit">Search</button>
+</form>
+{% endblock title %}
+    
+
+{% block start %}
+{% if user.is_authenticated %}
+    <h5>Add your recipe <a href="{% url 'add_recipe' %}">here</a></h5>
+{% else %}
+    <!-- Button trigger modal -->
+    <h5>Add your recipe <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-next="{{ request.get_full_path }}">here</a></h5>
+{% endif %}
+<br>
+<div class="row">
+    <h5>Find your taste here...</h5>
+    {% for rec in recipes %}
+    <div class="col-md-3 mb-3">
+        <div class="card">
+            <img src="/media/{{ rec.recepie_image }}" class="card-img-top" alt="{{ rec.title }}" style="height: 300px;">
+            <div class="card-body">
+                <h5 class="card-title">{{ rec.title }}</h5>
+                <p class="card-text">{{ rec.description | truncatechars:100 }}</p>
+                <a href="{% url 'recipe' rec.pk %}" class="btn btn-custom">View Recipe</a>
+            </div>
+        </div>
+    </div>
+    {% if forloop.counter|divisibleby:4 and not forloop.last %}
+        </div><div class="row">
+    {% endif %}
+    {% endfor %}
+    
+</div>
+{% endblock %}
